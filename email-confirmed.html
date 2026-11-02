@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Επιβεβαίωση email – Μαθαίνω</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<div id="ok">
+<h1>Το email σας επιβεβαιώθηκε ✓</h1>
+<p>Ο λογαριασμός σας στο <strong>Μαθαίνω</strong> είναι έτοιμος.</p>
+<p>Επιστρέψτε στην εφαρμογή και συνδεθείτε με το email και τον κωδικό σας.</p>
+</div>
+
+<div id="error" hidden>
+<h1>Ο σύνδεσμος δεν ισχύει</h1>
+<p>Ο σύνδεσμος επιβεβαίωσης έχει λήξει ή έχει ήδη χρησιμοποιηθεί.</p>
+<p>Δοκιμάστε να συνδεθείτε στην εφαρμογή. Αν δεν γίνεται, κάντε ξανά εγγραφή με το ίδιο email για να λάβετε νέο σύνδεσμο, ή γράψτε μας στο <a href="mailto:mathainw@proton.me">mathainw@proton.me</a>.</p>
+</div>
+
+<p class="footer"><a href="index.html">Μαθαίνω</a> · <a href="privacy.html">Πολιτική Απορρήτου</a> · <a href="terms.html">Όροι Χρήσης</a></p>
+</main>
+<script>
+// Supabase redirects here after the confirmation link. On failure it adds
+// error details to the URL; on success it adds session tokens.
+var params = new URLSearchParams(location.hash.slice(1) + '&' + location.search.slice(1));
+if (params.has('error') || params.has('error_code')) {
+  document.getElementById('ok').hidden = true;
+  document.getElementById('error').hidden = false;
+}
+// Remove tokens and error details from the address bar and browser history.
+if (location.hash || location.search) {
+  history.replaceState(null, '', location.pathname);
+}
+</script>
+</body>
+</html>
